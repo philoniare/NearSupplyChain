@@ -14,7 +14,7 @@ export class SupplyChainContract {
     this.upcIndex = 1;
   }
 
-  get_products(): PersistentMap<i32, Product> {
+  getProducts(): PersistentMap<i32, Product> {
     return this.products;
   }
 

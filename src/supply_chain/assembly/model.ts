@@ -45,6 +45,9 @@ export class Product {
         this.productNotes = productNotes;
         this.ownerID = originFarmerID;
         this.itemState = ItemState.Harvested;
+        this.distributorID = 'none';
+        this.retailerID = 'none';
+        this.consumerID = 'none';
     }
 
     public toString(): string {

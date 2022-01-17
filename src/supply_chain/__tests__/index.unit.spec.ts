@@ -32,7 +32,7 @@ describe("SupplyChainContract", () => {
   it("allows a farmer to harvest coffee", () => {
     contract.harvestItem(upc, originFarmerID, originFarmName, originFarmInformation, originFarmLatitude,
         originFarmLongitude, productNotes);
-    const product = contract.get_products().get(upc);;
+    const product = contract.getProducts().get(upc);;
     expect(product).not.toBeNull();
     expect(product!.itemState).toBe(ItemState.Harvested, 'new product should be in harvested state');
   });
@@ -41,7 +41,7 @@ describe("SupplyChainContract", () => {
     contract.harvestItem(upc, originFarmerID, originFarmName, originFarmInformation, originFarmLatitude,
         originFarmLongitude, productNotes);
     contract.processItem(upc);
-    const product = contract.get_products().get(upc);;
+    const product = contract.getProducts().get(upc);;
     expect(product).not.toBeNull();
     expect(product!.itemState).toBe(ItemState.Processed, 'product state should be processed');
   });
@@ -51,7 +51,7 @@ describe("SupplyChainContract", () => {
         originFarmLongitude, productNotes);
     contract.processItem(upc);
     contract.packItem(upc);
-    const product = contract.get_products().get(upc);;
+    const product = contract.getProducts().get(upc);;
     expect(product).not.toBeNull();
     expect(product!.itemState).toBe(ItemState.Packed, 'product state should be packed');
   });
@@ -62,7 +62,7 @@ describe("SupplyChainContract", () => {
     contract.processItem(upc);
     contract.packItem(upc);
     contract.sellItem(upc, ONE_NEAR);
-    const product = contract.get_products().get(upc);
+    const product = contract.getProducts().get(upc);
     expect(product).not.toBeNull();
     expect(product!.itemState).toBe(ItemState.ForSale, 'product state should be for sale');
     expect(product!.productPrice).toBe(ONE_NEAR, 'product price should be one near');
@@ -77,7 +77,7 @@ describe("SupplyChainContract", () => {
     contract.packItem(upc);
     contract.sellItem(upc, ONE_NEAR);
     contract.buyItem(upc);
-    const product = contract.get_products().get(upc);
+    const product = contract.getProducts().get(upc);
     expect(product).not.toBeNull();
     expect(product!.itemState).toBe(ItemState.Sold, 'product state should be sold');
     expect(product!.distributorID).toBe(distributorID, 'product distributorID should be set correctly');
@@ -94,7 +94,7 @@ describe("SupplyChainContract", () => {
     contract.sellItem(upc, ONE_NEAR);
     contract.buyItem(upc);
     contract.shipItem(upc);
-    const product = contract.get_products().get(upc);
+    const product = contract.getProducts().get(upc);
     expect(product).not.toBeNull();
     expect(product!.itemState).toBe(ItemState.Shipped, 'product state should be shipped');
   });
@@ -110,7 +110,7 @@ describe("SupplyChainContract", () => {
     contract.buyItem(upc);
     contract.shipItem(upc);
     contract.receiveItem(upc);
-    const product = contract.get_products().get(upc);
+    const product = contract.getProducts().get(upc);
     expect(product).not.toBeNull();
     expect(product!.itemState).toBe(ItemState.Received, 'product state should be sold');
     expect(product!.retailerID).toBe(retailerID, 'product retailerID should be set correctly');
@@ -129,7 +129,7 @@ describe("SupplyChainContract", () => {
     contract.shipItem(upc);
     contract.receiveItem(upc);
     contract.purchaseItem(upc);
-    const product = contract.get_products().get(upc);
+    const product = contract.getProducts().get(upc);
     expect(product).not.toBeNull();
     expect(product!.itemState).toBe(ItemState.Purchased, 'product state should be purchased');
     expect(product!.consumerID).toBe(consumerID, 'product consumerID should be set correctly');
